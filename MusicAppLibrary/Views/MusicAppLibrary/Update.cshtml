@@ -1,0 +1,49 @@
+﻿
+@model MusicAppLibraryViewModel
+@using MusicApp.Model
+
+@{
+    string pageType = Model.CurrentMusic.MusicId > 0 ? "Update Music" : "Add Music";
+
+    ViewData["Title"] = $"Music Library | {pageType}";
+}
+
+<form action="~/Music/Index" method="post">
+    <div>
+        <div class="row">
+            <div class="col-6 offset-3 text-center">
+                <h1 class="display-4" style="margin: 20px 0px;">@pageType</h1>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="col-md-3 offset-md-3 form-group">
+                <label>Music Name: </label>
+                <input type="text" class="form-control" name="MusicName" value="@Model.CurrentMusic.MusicName" />
+            </div>
+            <div class="col-md-3 form-group">
+                <label>Artist : </label>
+                <input type="text" class="form-control" name="Artist" value="@Model.CurrentMusic.Artist" />
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="col-md-6 offset-md-3 form-group">
+                <label>Year: </label>
+                <input type="tel" class="form-control" name="Year" value="@Model.CurrentMusic.Year" />
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="col-md-6 offset-md-3 form-group">
+                <label>Album: </label>
+                <input type="email" class="form-control" name="Album" value="@Model.CurrentMusic.Album" />
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="col-md-6 offset-md-3">
+                <button type="button" class="btn btn-secondary" onclick="location.href = '/Music/Index'">CANCEL</button>
+                <button type="submit" class="btn btn-primary">SAVE Music</button>
+            </div>
+        </div>
+    </div>
+    <input type="hidden" name="MusicID" value="@Model.CurrentMusic.MusicId" />
+</form>
+

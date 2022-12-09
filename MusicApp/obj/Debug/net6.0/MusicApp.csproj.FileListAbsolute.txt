@@ -1,0 +1,12 @@
+C:\Users\aaron\source\repos\MusicApp\bin\Debug\net6.0\MusicApp.deps.json
+C:\Users\aaron\source\repos\MusicApp\bin\Debug\net6.0\MusicApp.dll
+C:\Users\aaron\source\repos\MusicApp\bin\Debug\net6.0\MusicApp.pdb
+C:\Users\aaron\source\repos\MusicApp\obj\Debug\net6.0\MusicApp.csproj.AssemblyReference.cache
+C:\Users\aaron\source\repos\MusicApp\obj\Debug\net6.0\MusicApp.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\aaron\source\repos\MusicApp\obj\Debug\net6.0\MusicApp.AssemblyInfoInputs.cache
+C:\Users\aaron\source\repos\MusicApp\obj\Debug\net6.0\MusicApp.AssemblyInfo.cs
+C:\Users\aaron\source\repos\MusicApp\obj\Debug\net6.0\MusicApp.csproj.CoreCompileInputs.cache
+C:\Users\aaron\source\repos\MusicApp\obj\Debug\net6.0\MusicApp.dll
+C:\Users\aaron\source\repos\MusicApp\obj\Debug\net6.0\refint\MusicApp.dll
+C:\Users\aaron\source\repos\MusicApp\obj\Debug\net6.0\MusicApp.pdb
+C:\Users\aaron\source\repos\MusicApp\obj\Debug\net6.0\ref\MusicApp.dll
