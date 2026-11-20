@@ -1,0 +1,60 @@
+@model Song
+
+@{
+    bool isNew = Model.SongId == 0;
+    string pageType = isNew ? "Add Song" : "Edit Song";
+    ViewData["Title"] = pageType;
+    int maxYear = DateTime.UtcNow.Year + 1;
+    bool toStudio = (ViewData["ReturnTo"] as string) == "studio";
+}
+
+<div class="row justify-content-center">
+    <div class="col-lg-7">
+        <h1 class="h2 fw-bold mb-4">@pageType</h1>
+
+        <form asp-action="Edit" asp-route-id="@Model.SongId" method="post" novalidate>
+            @if (toStudio)
+            {
+                <input type="hidden" name="returnTo" value="studio" />
+            }
+            <div asp-validation-summary="ModelOnly" class="alert alert-danger" role="alert"></div>
+
+            <div class="row g-3">
+                <div class="col-md-6">
+                    <label asp-for="Title" class="form-label">Song name <span class="text-danger">*</span></label>
+                    <input asp-for="Title" class="form-control" maxlength="200" autofocus />
+                    <span asp-validation-for="Title" class="text-danger small"></span>
+                </div>
+                <div class="col-md-6">
+                    <label asp-for="Artist" class="form-label">Artist <span class="text-danger">*</span></label>
+                    <input asp-for="Artist" class="form-control" maxlength="200" />
+                    <span asp-validation-for="Artist" class="text-danger small"></span>
+                </div>
+                <div class="col-md-8">
+                    <label asp-for="Album" class="form-label">Album</label>
+                    <input asp-for="Album" class="form-control" maxlength="200" />
+                    <span asp-validation-for="Album" class="text-danger small"></span>
+                </div>
+                <div class="col-md-4">
+                    <label asp-for="Year" class="form-label">Year</label>
+                    <input asp-for="Year" type="text" inputmode="numeric" pattern="[0-9]*" class="form-control" maxlength="4"
+                           data-val-range-max="@maxYear" data-val-range="Enter a year between @Song.MinYear and @maxYear." />
+                    <span asp-validation-for="Year" class="text-danger small"></span>
+                </div>
+            </div>
+
+            <p class="text-muted small mt-3 mb-4">
+                <span class="text-danger">*</span> Required. You can upload the song's audio in the 3D Studio after saving.
+            </p>
+
+            <div class="d-flex gap-2">
+                <a class="btn btn-secondary" asp-action="@(toStudio ? "Studio" : "Index")">Cancel</a>
+                <button type="submit" class="btn btn-primary">Save song</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
