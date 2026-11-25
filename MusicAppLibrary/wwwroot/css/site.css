@@ -16,3 +16,46 @@ html {
 body {
   margin-bottom: 60px;
 }
+body {
+  background: #f6f5fa;
+}
+
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  white-space: nowrap;
+  line-height: 60px;
+}
+
+.option-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  height: 100%;
+  padding: 2rem 1.5rem;
+  border-radius: 1rem;
+  background: #fff;
+  box-shadow: 0 6px 24px rgba(30, 20, 60, 0.08);
+  color: inherit;
+  text-decoration: none;
+  transition: transform 150ms, box-shadow 150ms;
+}
+
+.option-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 32px rgba(30, 20, 60, 0.15);
+  color: inherit;
+}
+
+.option-icon { font-size: 2.5rem; }
+.option-title { font-size: 1.35rem; font-weight: 700; }
+.option-text { color: #6c757d; }
+
+/* Reserve space for validation messages so the form doesn't jump while you type. */
+.field-validation-valid,
+.field-validation-error {
+  display: block;
+  min-height: 1.3rem;
+}

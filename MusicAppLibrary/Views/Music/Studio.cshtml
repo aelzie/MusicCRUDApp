@@ -1,0 +1,98 @@
+@inject Microsoft.AspNetCore.Antiforgery.IAntiforgery Antiforgery
+@{
+    Layout = null;
+    var tokens = Antiforgery.GetAndStoreTokens(Context);
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="csrf-token" content="@tokens.RequestToken" />
+    <title>3D Studio - Music Library</title>
+    <link rel="stylesheet" href="~/css/studio.css" asp-append-version="true" />
+    <script type="importmap">
+        {
+            "imports": {
+                "three": "/lib/three/three.module.min.js",
+                "three/addons/": "/lib/three/addons/"
+            }
+        }
+    </script>
+</head>
+<body>
+    <header class="topbar">
+        <a class="brand" asp-controller="Home" asp-action="Index">🎵 Music Library</a>
+        <nav>
+            <a asp-controller="Music" asp-action="Index">Library table</a>
+            <a class="primary" href="/Music/Edit/0?returnTo=studio">+ Add song</a>
+        </nav>
+    </header>
+
+    <div id="scene" class="scene">
+        <div id="scene-loading" class="center-msg">Loading your records…</div>
+        <div id="empty-state" class="center-msg" hidden>
+            <p>Your shelf is empty.</p>
+            <a class="btn primary" href="/Music/Edit/0?returnTo=studio">Add your first song</a>
+        </div>
+    </div>
+
+    <div class="carousel-controls">
+        <button id="prev-btn" type="button" aria-label="Previous records">‹</button>
+        <span class="hint">Click a record to play it · Drag to look around · ← → to browse</span>
+        <button id="next-btn" type="button" aria-label="Next records">›</button>
+    </div>
+
+    <aside id="panel" class="panel" hidden aria-live="polite">
+        <button id="close-panel" class="close" type="button" aria-label="Close">×</button>
+        <h1 id="song-title" class="song-title"></h1>
+        <p id="song-artist" class="song-artist"></p>
+        <p id="song-meta" class="song-meta"></p>
+
+        <section class="section">
+            <p id="no-audio" class="muted">No audio yet. Upload an MP3, WAV, OGG, M4A, AAC or FLAC file (up to 60 MB) to play this song.</p>
+            <p id="audio-name" class="audio-name"></p>
+            <div class="row">
+                <label class="btn">
+                    <span id="upload-label">Upload audio</span>
+                    <input id="upload-input" type="file" accept=".mp3,.wav,.ogg,.oga,.m4a,.aac,.flac,.webm,audio/*" hidden />
+                </label>
+                <button id="remove-audio" class="btn ghost" type="button" hidden>Remove audio</button>
+            </div>
+        </section>
+
+        <section id="player" class="section" hidden>
+            <div class="row">
+                <button id="play-btn" class="btn primary play" type="button" disabled>▶ Play</button>
+                <span id="time" class="time">0:00 / 0:00</span>
+            </div>
+            <input id="seek" class="seek" type="range" min="0" max="1000" value="0" aria-label="Seek" disabled />
+
+            <h2 class="section-title">🎤 Karaoke mode</h2>
+            <div class="segmented" role="group" aria-label="Track">
+                <button type="button" data-mode="original" class="active">Original</button>
+                <button type="button" data-mode="instrumental">Instrumental</button>
+                <button type="button" data-mode="vocals">Vocals only</button>
+            </div>
+            <div class="segmented small" role="group" aria-label="Separation engine">
+                <button type="button" data-engine="quick" class="active" title="Runs instantly in your browser. Works best on studio stereo recordings.">⚡ Quick (browser)</button>
+                <button type="button" data-engine="ai" title="Higher quality. Needs Python and Demucs on the computer running this app.">🤖 AI (Demucs)</button>
+            </div>
+            <p id="ai-note" class="muted small"></p>
+        </section>
+
+        <div id="status-bar" class="status-bar" hidden><div id="status-fill" class="status-fill"></div></div>
+        <p id="status" class="status"></p>
+
+        <section class="section row actions">
+            <a id="edit-link" class="btn" href="#">Edit details</a>
+            <button id="delete-btn" class="btn danger" type="button">Delete song</button>
+        </section>
+    </aside>
+
+    <div id="toast" class="toast" hidden role="status"></div>
+
+    <noscript><p class="center-msg">The 3D Studio needs JavaScript. Use the <a href="/Music/Index">library table</a> instead.</p></noscript>
+    <script type="module" src="~/js/studio/studio.js" asp-append-version="true"></script>
+</body>
+</html>
